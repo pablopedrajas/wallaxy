@@ -28,13 +28,23 @@ app.get('', (req,res) => {
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        title: 'About Me',
+        title: 'About',
         name: 'Licensede'
     })
 })
 
-app.get('/help', (req, res) => {
-    
+app.get('/pricing', (req, res) => {
+    res.render('pricing', {
+        title: 'Pricing',
+        name: 'Licensede'
+    })
+})
+
+app.get('/faq', (req, res) => {
+    res.render('faq', {
+        title: 'Frequently Asked Questions',
+        name: 'Licensede'
+    })
 })
 
 // Seting Error 404
