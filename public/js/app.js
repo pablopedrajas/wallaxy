@@ -128,6 +128,23 @@ var budgetController = (function(){
         
         testing: function() {
             console.log(data);
+        },
+
+        data,
+
+        updateLocalStorage: function() {
+            localStorage.setItem("data", JSON.stringify(data))
+            let parsedData = JSON.parse(localStorage.getItem("data"))
+            console.log('Local storage has been modified: ')
+            console.log(parsedData)
+            data = parsedData;
+        },
+
+        setInitialLists: function() {
+            // set initial income list
+
+            // set initial expense list
+
         }
     };
     
@@ -329,6 +346,8 @@ var controller = (function(budgetCtrl, UICtrl) {
         var budget = budgetCtrl.getBudget();
 		//3. Display the budget on the UI
         UICtrl.displayBudget(budget);
+        //4. Update local storage
+        budgetCtrl.updateLocalStorage()
     };
     
     //update percentages
@@ -359,6 +378,8 @@ var controller = (function(budgetCtrl, UICtrl) {
             updateBudget();
             //6. Calculate and update expenses percentages
             updatePercentages();
+            //7. Update local storage
+            budgetCtrl.updateLocalStorage()
         };
     };
     
@@ -381,18 +402,49 @@ var controller = (function(budgetCtrl, UICtrl) {
             updateBudget();
             //4. Calculate and update expenses percentages
             updatePercentages();
+            //5. Update local storage
+            budgetCtrl.updateLocalStorage()
         }
     };
     
     //create init function and make it public by returning it
     return {
         init: function() {
-            console.log("app initialized");
+            console.log("App initialized");
+            //if there's no data in local storage, set local storage data = 0.
+            
+            //set data to local storage data
+            budgetCtrl.data = localStorage.getItem("data")
+            console.log("Initial stored data: ")
+            console.log(budgetCtrl.data)
+            //set initial lists based on local storage
+            budgetCtrl.setInitialLists()
+            //get actual month and display it
             UICtrl.displayMonth();
+            
+            //get budget and display it
             UICtrl.displayBudget({
-                budget: 0,
-                totalInc: 0,
-                totalExp: 0,
+                budget: function() {
+                    if(localStorage.getItem(data) == 0 || localStorage.getItem(data) == null) {
+                        return 0;
+                    } else {
+                        return JSON.parse(budgetCtrl.data).budget;
+                    }
+                },
+                totalInc: function() {
+                    if(localStorage.getItem(data) == 0 || localStorage.getItem(data) == null) {
+                        return 0;
+                    } else {
+                        return JSON.parse(budgetCtrl.data).totals.inc;
+                    }
+                },
+                totalExp: function() {
+                    if(localStorage.getItem(data) == 0 || localStorage.getItem(data) == null) {
+                        return 0;
+                    } else {
+                        return JSON.parse(budgetCtrl.data).totals.exp;
+                    }
+                },
                 percentage: -1
             });
             setupEventListeners();

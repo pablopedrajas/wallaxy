@@ -26,6 +26,13 @@ app.get('', (req,res) => {
     })
 })
 
+app.get('/login', (req, res) => {
+    res.render('login', {
+        title: 'Login Page',
+        name: 'Licensede'
+    })
+})
+
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About',
