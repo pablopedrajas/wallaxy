@@ -28,19 +28,27 @@ var budgetController = (function(){
         this. value = value;
     };
     
-    var data = {
-        allItems: {
-            exp: [],
-            inc: []
-        },
-        totals: {
-            exp: 0,
-            inc: 0
-        },
-        budget: 0,
-        percentage: -1
-    };
-    
+    var checkedData = function() {
+        if (localStorage.getItem("data")) {
+            return JSON.parse(localStorage.getItem("data"))
+        } else { 
+            return {
+                allItems: {
+                exp: [],
+                inc: []
+                },
+                totals: {
+                    exp: 0,
+                    inc: 0
+                },
+                budget: 0,
+                percentage: -1
+            }
+        }
+    }
+
+    var data = checkedData();
+
     var calculateTotal = function(type) {
         var sum = 0;
         //sum values of the array
@@ -141,10 +149,28 @@ var budgetController = (function(){
         },
 
         setInitialLists: function() {
+            let parsedData = JSON.parse(localStorage.getItem("data"))
+            console.log("Revealing parsed data: ", parsedData.allItems.inc.length)
+            console.log("Inc array length is: ", parsedData.allItems.inc.length)
+            console.log("Exp array length is: ", parsedData.allItems.exp.length)
             // set initial income list
-
+            if (parsedData.allItems.inc.length === 0) {
+                return;
+            } else {
+                console.log("Inc items has data.")
+                for (var i = 0; i < parsedData.allItems.inc.length; i++) {
+                    UIController.addListItem(parsedData.allItems.inc[i], 'inc')
+                }
+            }
             // set initial expense list
-
+            if (parsedData.allItems.exp.length === 0){
+                return;
+            } else {
+                console.log("Exp items has data.")
+                for (var j = 0; j < parsedData.allItems.exp.length; j++) {
+                    UIController.addListItem(parsedData.allItems.exp[j], 'exp')
+                }
+            }
         }
     };
     
@@ -411,40 +437,26 @@ var controller = (function(budgetCtrl, UICtrl) {
     return {
         init: function() {
             console.log("App initialized");
-            //if there's no data in local storage, set local storage data = 0.
-            
-            //set data to local storage data
-            budgetCtrl.data = localStorage.getItem("data")
-            console.log("Initial stored data: ")
-            console.log(budgetCtrl.data)
+            let parsedData = budgetCtrl.data;
+            console.log("Parsed data is: ", parsedData)
+            console.log("Stringified data is: ", JSON.stringify(budgetCtrl.data))
+            //if there's no data in local storage, set local storage to budgetCtrl.data, that is empty.
+            if (!localStorage.getItem("data")) {
+                localStorage.setItem("data", JSON.stringify(budgetCtrl.data))
+            } else {
+                //if there was prev saved data, set data to local storage data
+                budgetCtrl.data = localStorage.getItem("data")
+                console.log("Initial stored data is: ", budgetCtrl.data)
+            }
             //set initial lists based on local storage
             budgetCtrl.setInitialLists()
             //get actual month and display it
             UICtrl.displayMonth();
-            
             //get budget and display it
             UICtrl.displayBudget({
-                budget: function() {
-                    if(localStorage.getItem(data) == 0 || localStorage.getItem(data) == null) {
-                        return 0;
-                    } else {
-                        return JSON.parse(budgetCtrl.data).budget;
-                    }
-                },
-                totalInc: function() {
-                    if(localStorage.getItem(data) == 0 || localStorage.getItem(data) == null) {
-                        return 0;
-                    } else {
-                        return JSON.parse(budgetCtrl.data).totals.inc;
-                    }
-                },
-                totalExp: function() {
-                    if(localStorage.getItem(data) == 0 || localStorage.getItem(data) == null) {
-                        return 0;
-                    } else {
-                        return JSON.parse(budgetCtrl.data).totals.exp;
-                    }
-                },
+                budget: parsedData.budget,
+                totalInc: parsedData.totals.inc,
+                totalExp: parsedData.totals.exp,
                 percentage: -1
             });
             setupEventListeners();
