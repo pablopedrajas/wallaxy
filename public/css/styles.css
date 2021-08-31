@@ -310,4 +310,8 @@ h2 {
     .item__percentage {
         margin-left: 0px;
     }
+
+    .income {
+        margin-right: 0px;
+    }
 }
