@@ -314,4 +314,10 @@ h2 {
     .income {
         margin-right: 0px;
     }
+
+    .item {
+        padding: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 }
