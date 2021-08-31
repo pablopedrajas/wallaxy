@@ -178,7 +178,8 @@ body {
 .container {
     text-align: center;
     align-items: center;
-    margin: 60px auto;
+    /* margin: 60px auto; */
+    padding-top: 60px;
 }
 
 .income {
@@ -298,7 +299,7 @@ h2 {
         justify-content: center;
     }
 
-    /* .add__btn {
+    .add__btn {
         margin-left: 0px;
     }
 
@@ -308,5 +309,5 @@ h2 {
 
     .item__percentage {
         margin-left: 0px;
-    } */
+    }
 }
