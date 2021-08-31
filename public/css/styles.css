@@ -160,7 +160,7 @@ body {
     display: inline-block;
     vertical-align: middle;
     line-height: 1.1;
-    /* margin-left: 10px; */
+    margin-left: 10px;
 }
 
 .add__btn:active { transform: translateY(2px); }
@@ -289,6 +289,12 @@ h2 {
 }
 
 /**********************************************
-*** FOOTER
+*** MOBILE VIEW
 **********************************************/
-
+@media only screen and (max-width: 768px) {
+    div .add__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
