@@ -297,4 +297,8 @@ h2 {
         align-items: center;
         justify-content: center;
     }
+
+    .add__btn {
+        margin-left: 0px;
+    }
 }
