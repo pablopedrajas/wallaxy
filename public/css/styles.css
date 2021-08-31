@@ -298,26 +298,4 @@ h2 {
         align-items: center;
         justify-content: center;
     }
-
-    .add__btn {
-        margin-left: 0px;
-    }
-
-    .budget__expenses--percentage {
-        margin-left: 0px;
-    }
-
-    .item__percentage {
-        margin-left: 0px;
-    }
-
-    .income {
-        margin-right: 0px;
-    }
-
-    .item {
-        padding: 0px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
 }
