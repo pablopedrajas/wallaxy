@@ -183,15 +183,13 @@ body {
 }
 
 .income {
-    float: left;
     width: 400px;
-    margin-right: 50px;
-    margin-bottom: 50px;
+    margin:auto;
 }
 
 .expenses {
-    float: left;
     width: 400px;
+    margin: auto;
 }
 
 h2 {
@@ -214,6 +212,7 @@ h2 {
 .item {
     padding: 13px;
     border-bottom: 1px solid #e7e7e7;
+    margin: 0 auto;
 }
 
 .item:first-child { border-top: 1px solid #e7e7e7; }
@@ -315,5 +314,9 @@ h2 {
         padding: 0px;
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+
+    .col-sm-6 {
+        margin-bottom: 75px;
     }
 }

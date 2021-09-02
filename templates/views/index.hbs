@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html>
-    {{>head}}
-    {{>header}}
-    <body>
-        <div class="main-content">
-            <!-- Top Banner -->
-            <div class="top">
-                <div class="budget">
-                    <div class="budget__title">
-                        Available Budget in <span class="budget__title--month">%Month%</span>:
+{{>head}}
+{{>header}}
+
+<body>
+    <div class="main-content">
+        <!-- Top Banner -->
+        <div class="top">
+            <div class="budget">
+                <div class="budget__title">
+                    Available Budget in <span class="budget__title--month">%Month%</span>:
+                </div>
+                <!-- Monthly Budget -->
+                <div class="budget__value"></div>
+                <!-- Monthly Income -->
+                <div class="budget__income clearfix">
+                    <div class="budget__income--text">Income</div>
+                    <div class="right">
+                        <div class="budget__income--value"></div>
+                        <div class="budget__income--percentage">&nbsp;</div>
                     </div>
-                    <!-- Monthly Budget -->
-                    <div class="budget__value"></div>
-                    <!-- Monthly Income -->
-                    <div class="budget__income clearfix">
-                        <div class="budget__income--text">Income</div>
-                        <div class="right">
-                            <div class="budget__income--value"></div>
-                            <div class="budget__income--percentage">&nbsp;</div>
-                        </div>
-                    </div>
-                    <!-- Monhtly Expenses -->
-                    <div class="budget__expenses clearfix">
-                        <div class="budget__expenses--text">Expenses</div>
-                        <div class="right clearfix">
-                            <div class="budget__expenses--value"></div>
-                            <div class="budget__expenses--percentage"></div>
-                        </div>
+                </div>
+                <!-- Monhtly Expenses -->
+                <div class="budget__expenses clearfix">
+                    <div class="budget__expenses--text">Expenses</div>
+                    <div class="right clearfix">
+                        <div class="budget__expenses--value"></div>
+                        <div class="budget__expenses--percentage"></div>
                     </div>
                 </div>
             </div>
-            <!-- Adding Income/Expenses -->
-            <div class="bottom">
-                <div class="add">
-                    <div class="add__container">
-                        <select class="add__type">
-                            <option value="inc" selected>+</option>
-                            <option value="exp">-</option>
-                        </select>
-                        <input type="text" class="add__description" placeholder="Add description">
-                        <input type="number" class="add__value" placeholder="Value">
-                        <button class="add__btn">
-                            <i class="ion-ios-checkmark-outline"></i>
-                        </button>
-                    </div>
+        </div>
+        <!-- Adding Income/Expenses -->
+        <div class="bottom">
+            <div class="add">
+                <div class="add__container">
+                    <select class="add__type">
+                        <option value="inc" selected>+</option>
+                        <option value="exp">-</option>
+                    </select>
+                    <input type="text" class="add__description" placeholder="Add description">
+                    <input type="number" class="add__value" placeholder="Value">
+                    <button class="add__btn">
+                        <i class="ion-ios-checkmark-outline"></i>
+                    </button>
                 </div>
-                <!-- Income and Expenses -->
-                <div class="container">
-                    <div class="container clearfix" id="container-records">
-                        <!-- Income -->
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="income">
-                                    <h2 class="income__title">Income</h2>
-                                    <div class="income__list"></div>
-                                </div>
+            </div>
+            <!-- Income and Expenses -->
+            <div class="container">
+                <div class="container" id="container-records">
+                    <!-- Income -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="income">
+                                <h2 class="income__title">Income</h2>
+                                <div class="income__list"></div>
                             </div>
+                        </div>
                         <!-- Expenses -->
-                            <div class="col-sm-6">
-                                <div class="expenses">
-                                    <h2 class="expenses__title">Expenses</h2>
-                                    <div class="expenses__list"></div>
-                                </div>
+                        <div class="col-sm-6">
+                            <div class="expenses">
+                                <h2 class="expenses__title">Expenses</h2>
+                                <div class="expenses__list"></div>
                             </div>
                         </div>
                     </div>
@@ -69,6 +69,7 @@
             </div>
         </div>
         <script src="./js/app.js"></script>
-    </body>
-    {{>footer}}
+</body>
+{{>footer}}
+
 </html>
