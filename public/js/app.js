@@ -155,7 +155,7 @@ var budgetController = (function(){
             console.log("Exp array length is: ", parsedData.allItems.exp.length)
             // set initial income list
             if (parsedData.allItems.inc.length === 0) {
-                return;
+                console.log("There is no income this month.");
             } else {
                 console.log("Inc items has data.")
                 for (var i = 0; i < parsedData.allItems.inc.length; i++) {
@@ -164,7 +164,7 @@ var budgetController = (function(){
             }
             // set initial expense list
             if (parsedData.allItems.exp.length === 0){
-                return;
+                console.log("There are no expenses this month.");
             } else {
                 console.log("Exp items has data.")
                 for (var j = 0; j < parsedData.allItems.exp.length; j++) {

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>404 Page</title>
-        <meta name="viewport" content="width=device-width, user-scalable=no">
-        <link rel="icon" href="./img/weather.png">
-        <link rel="stylesheet" href="./css/styles.css">
-    </head>
-    <body>
-        <div class="main-content">
-            {{>header}}
-            <img class="portrait" src="https://images.unsplash.com/photo-1594322436404-5a0526db4d13?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1315&q=80">
+    {{>head}}
+    {{>header}}
+    <main>
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-white">
+            <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 fw-normal">Error 404</h1>
+            <p class="lead fw-normal">Page not found.</p>
+            </div>
+            <div class="product-device shadow-sm d-none d-md-block"></div>
+            <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
         </div>
-        
-        {{>footer}}
-    </body>
+    </main>
+    {{>footer}}
 </html>
