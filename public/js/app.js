@@ -150,14 +150,10 @@ var budgetController = (function(){
 
         setInitialLists: function() {
             let parsedData = JSON.parse(localStorage.getItem("data"))
-            console.log("Revealing parsed data: ", parsedData.allItems.inc.length)
-            console.log("Inc array length is: ", parsedData.allItems.inc.length)
-            console.log("Exp array length is: ", parsedData.allItems.exp.length)
             // set initial income list
             if (parsedData.allItems.inc.length === 0) {
                 console.log("There is no income this month.");
             } else {
-                console.log("Inc items has data.")
                 for (var i = 0; i < parsedData.allItems.inc.length; i++) {
                     UIController.addListItem(parsedData.allItems.inc[i], 'inc')
                 }
@@ -166,7 +162,6 @@ var budgetController = (function(){
             if (parsedData.allItems.exp.length === 0){
                 console.log("There are no expenses this month.");
             } else {
-                console.log("Exp items has data.")
                 for (var j = 0; j < parsedData.allItems.exp.length; j++) {
                     UIController.addListItem(parsedData.allItems.exp[j], 'exp')
                 }
@@ -245,14 +240,16 @@ var UIController = (function(){
                 html = '<div class="item clearfix" id="inc-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value% €</div> <div class="item__delete"> <button class="item__delete--btn"> <i class="ion-ios-close-outline"></i> </button> </div> </div> </div>';
             } else if(type === "exp") {
                 element = DOMstrings.expensesContainer;
-                html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value% €</div><div class="item__percentage">%percentage%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+                html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value% €</div><div class="item__percentage">XX</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
             };
             
             //replace the placeholder text with some actual data
             newHtml = html.replace('%id%', obj.id);
             newHtml = newHtml.replace('%description%', obj.description);
             newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
-            newHtml = newHtml.replace('%percentage%', formatNumber(obj.percentage));
+
+            //calculate exp percentage of the total income
+            /* newHtml = newHtml.replace('%percentage%', formatNumber(obj.percentage)); */
             
             //insert html to the DOM, beforeend is the last one of the list in html
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
@@ -437,17 +434,15 @@ var controller = (function(budgetCtrl, UICtrl) {
     //create init function and make it public by returning it
     return {
         init: function() {
-            console.log("App initialized");
+            console.log("Welcome developer.");
             let parsedData = budgetCtrl.data;
-            console.log("Parsed data is: ", parsedData)
-            console.log("Stringified data is: ", JSON.stringify(budgetCtrl.data))
             //if there's no data in local storage, set local storage to budgetCtrl.data, that is empty.
             if (!localStorage.getItem("data")) {
                 localStorage.setItem("data", JSON.stringify(budgetCtrl.data))
             } else {
                 //if there was prev saved data, set data to local storage data
                 budgetCtrl.data = localStorage.getItem("data")
-                console.log("Initial stored data is: ", budgetCtrl.data)
+                console.log("This is your initial stored data is: ", budgetCtrl.data)
             }
             //set initial lists based on local storage
             budgetCtrl.setInitialLists()
