@@ -1,26 +1,28 @@
 //budgetcontroller module
 //module pattern with IIFE - Immediately Invoked Function Expression
 var budgetController = (function(){
+    //localStorage data
+    var localData = checkedData;
+
     //capital E as its a function constructor
     var Expense = function(id, description, value, percentage) {
         this.id = id;
         this.description = description;
-        this. value = value;
-        this.percentage = -1;
+        this.value = value;
     };
     
     //create a method for Expense objects to calculate expenses percentage
-    Expense.prototype.calcPercentage = function(totalIncome) {
+    /* Expense.prototype.calcPercentage = function(totalIncome) {
         if(totalIncome > 0) { 
             this.percentage = Math.round((this.value / totalIncome) * 100);
         } else {
             this.percentage = -1;
         }
-    };
+    }; */
     
-    Expense.prototype.getPercentage = function() {
+    /*Expense.prototype.getPercentage = function() {
         return this.percentage;
-    };
+    };*/
     
     var Income = function(id, description, value) {
         this.id = id;
@@ -112,11 +114,11 @@ var budgetController = (function(){
             }
         },
         
-        calculatePercentages: function() {
+        /* calculatePercentages: function() {
             data.allItems.exp.forEach(function(cur) {
                 cur.calcPercentage(data.totals.inc);
             })
-        },
+        }, */
         
         getPercentages: function() {
             var allPerc = data.allItems.exp.map(function(cur) {
@@ -240,15 +242,14 @@ var UIController = (function(){
                 html = '<div class="item clearfix" id="inc-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value% €</div> <div class="item__delete"> <button class="item__delete--btn"> <i class="ion-ios-close-outline"></i> </button> </div> </div> </div>';
             } else if(type === "exp") {
                 element = DOMstrings.expensesContainer;
-                html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value% €</div><div class="item__percentage">XX</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+                html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value% €</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
             };
             
             //replace the placeholder text with some actual data
             newHtml = html.replace('%id%', obj.id);
             newHtml = newHtml.replace('%description%', obj.description);
             newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
-
-            //calculate exp percentage of the total income
+            // newHtml = newHtml.replace('%percentage%', obj.percentage);
             /* newHtml = newHtml.replace('%percentage%', formatNumber(obj.percentage)); */
             
             //insert html to the DOM, beforeend is the last one of the list in html
@@ -375,7 +376,7 @@ var controller = (function(budgetCtrl, UICtrl) {
     };
     
     //update percentages
-    var updatePercentages = function() {
+    /* var updatePercentages = function() {
         //1. calculate percentages
         budgetCtrl.calculatePercentages();
         //2. read them from the budget controller
@@ -383,7 +384,7 @@ var controller = (function(budgetCtrl, UICtrl) {
         //3. update UI with new percentages
         UICtrl.displayPercentages(percentages);
         
-    };
+    }; */
     
     //add item button
     var ctrlAddItem = function() {
@@ -401,7 +402,7 @@ var controller = (function(budgetCtrl, UICtrl) {
             //5. Calculate and update budget
             updateBudget();
             //6. Calculate and update expenses percentages
-            updatePercentages();
+            /* updatePercentages(); */
             //7. Update local storage
             budgetCtrl.updateLocalStorage()
         };
@@ -442,7 +443,7 @@ var controller = (function(budgetCtrl, UICtrl) {
             } else {
                 //if there was prev saved data, set data to local storage data
                 budgetCtrl.data = localStorage.getItem("data")
-                console.log("This is your initial stored data is: ", budgetCtrl.data)
+                console.log("This is your initial stored data is: ", JSON.parse(budgetCtrl.data))
             }
             //set initial lists based on local storage
             budgetCtrl.setInitialLists()
@@ -453,7 +454,7 @@ var controller = (function(budgetCtrl, UICtrl) {
                 budget: parsedData.budget,
                 totalInc: parsedData.totals.inc,
                 totalExp: parsedData.totals.exp,
-                percentage: -1
+                percentage: parsedData.percentage
             });
             setupEventListeners();
         }
