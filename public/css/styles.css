@@ -97,7 +97,7 @@ body {
     width: 34px;
     font-size: 11px;
     padding: 3px 0;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
 .budget__expenses--percentage {
@@ -160,7 +160,6 @@ body {
     display: inline-block;
     vertical-align: middle;
     line-height: 1.1;
-    margin-left: 10px;
 }
 
 .add__btn:active { transform: translateY(2px); }
@@ -231,7 +230,7 @@ h2 {
 
 .item__percentage {
     float: left;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     transition: transform 0.3s;
     font-size: 11px;
     background-color: #FFDAD9;
