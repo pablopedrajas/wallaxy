@@ -316,6 +316,7 @@ h2 {
         padding: 0px;
         padding-top: 10px;
         padding-bottom: 10px;
+        max-width: 350px;
     }
 
     .col-sm-12 {
