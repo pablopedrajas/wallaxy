@@ -1,5 +1,5 @@
 # WALLAXY 💰
-- This app currently runs in: https://wallaxy.herokuapp.com/ 
+- (NEW) This app is currently unavailable online. If you wish to try it, you will have to deploy it.
 
 ## USAGE
 
